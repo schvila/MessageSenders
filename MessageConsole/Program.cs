@@ -3,7 +3,6 @@
 
 using WhatsApp;
 
-var accountSID = "ACe991cea47c0905c1f7546b01ad57958e";
 
 var token = "afab8efa3d285871beb4ba5b461c266f";
 var twilioSendBoxNr = "+14155238886";
