@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Viber\Viber.csproj" />
     <ProjectReference Include="..\WhatsApp\WhatsApp.csproj" />
   </ItemGroup>
 
