@@ -1,27 +1,32 @@
 ﻿using System.Net.Http.Headers;
 using Discord;
+using Discord.Net;
 using Discord.Webhook;
+using Discord.WebSocket;
 
 namespace DiscordSpace;
 
 public class DiscordLib
 {
-    private ConnectorClient _connector;
+    private DiscordSocketClient _client;
 
-    public void Init(string appId, string appPassword)
+    public async Task Init(string token)
     {
-        _connector = new ConnectorClient(new Uri("https://smba.trafficmanager.net/amer/"), appId, appPassword);
+        _client = new DiscordSocketClient();
+        await _client.LoginAsync(TokenType.Bot, token);
+        await _client.StartAsync();        
     }
 
-    public async SendMessageAsync(string webhookUrl, string message)
+    public async Task SendMessageAsync(ulong userId, string message)
     {
-        // Set up Discord webhook with your webhook URL
-        var webhook = new DiscordWebhookClient(webhookUrl);
+        var user = _client.GetUser(userId);
+        var channel = await user.CreateDMChannelAsync();
+        if (channel == null)
+        {
+            throw new InvalidOperationException(
+                $"Could not create DM channel with user {user.Username}#{user.Discriminator}.");
+        }
 
-        // Send a Discord message
-        await webhook.SendMessageAsync(message);
-
+        await channel.SendMessageAsync(message);
     }
-
-
 }

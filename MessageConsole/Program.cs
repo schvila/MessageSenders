@@ -5,8 +5,8 @@ using System.Text;
 using WhatsApp;
 using Viber;
 
-//WhatsApp();
-await ViberTest();
+WhatsAppTest();
+//await ViberTest();
 string Decrypt(string pwd)
 {
     byte[] b = Convert.FromBase64String(pwd);
@@ -27,7 +27,7 @@ void WhatsAppTest()
     var twilioSendBoxNr = "+14155238886";
     var lib = new WhatsAppLib();
     lib.Init(accountSID, token);
-    //lib.SendMessage(twilioSendBoxNr, liborMobil, "WhatsApp api test using Twilio");
-    lib.SendMessage(liborMobil, twilioSendBoxNr, "WhatsApp api test using Twilio");
+    lib.SendMessage(twilioSendBoxNr, "+420603446641", "WhatsApp api test using Twilio");
+    //lib.SendMessage(liborMobil, twilioSendBoxNr, "WhatsApp api test using Twilio");
 
 }
